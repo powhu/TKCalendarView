@@ -1,4 +1,4 @@
-# TKCalendar
+# TKCalendarView
 
 The page curl animation calendar.  Inspired by 『君の名は｡』
 
@@ -9,7 +9,7 @@ Swipe to change date with page curl animation.
 
 ## Preview
 
-![](ScreenShots/sample.gif)
+![](Screenshots/sample.gif)
 
 ## Installation
 ### Cocoapods
