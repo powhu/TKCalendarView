@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'TKCalendarView'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of TKCalendarView.'
+  s.summary          = 'The page curl animation calendar.  Inspired by 『君の名は｡』'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,18 +17,16 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  s.description      = 'A calendar app used in the movie called 『君の名は｡』.Swipe to change date with page curl animation.'
 
-  s.homepage         = 'https://github.com/<GITHUB_USERNAME>/TKCalendarView'
+  s.homepage         = 'https://github.com/powhu/TKCalendarView'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Yang' => 'yang@electrodream.jp' }
-  s.source           = { :git => 'https://github.com/<GITHUB_USERNAME>/TKCalendarView.git', :tag => s.version.to_s }
+  s.author           = { 'PowHu Yang' => 'powhuapp@gmail.com' }
+  s.source           = { :git => 'https://github.com/powhu/TKCalendarView.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'TKCalendarView/Classes/**/*'
   
