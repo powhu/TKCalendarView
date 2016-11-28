@@ -1,0 +1,16 @@
+PODS:
+  - TKCalendarView (0.1.0)
+
+DEPENDENCIES:
+  - TKCalendarView (from `../`)
+
+EXTERNAL SOURCES:
+  TKCalendarView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  TKCalendarView: 149f40b71731a1dc2e526caa78f7f434412853ae
+
+PODFILE CHECKSUM: 14fc30200343f864b74a1b72985836508eb43766
+
+COCOAPODS: 1.0.0

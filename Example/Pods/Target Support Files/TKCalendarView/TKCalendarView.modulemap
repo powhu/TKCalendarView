@@ -1,0 +1,6 @@
+framework module TKCalendarView {
+  umbrella header "TKCalendarView-umbrella.h"
+
+  export *
+  module * { export * }
+}
