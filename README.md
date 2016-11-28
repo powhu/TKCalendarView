@@ -8,7 +8,7 @@ The page curl animation calendar.  Inspired by 『[君の名は｡](http://www.k
 
 ## About
 
-A calendar app used in the movie called 『[君の名は｡](http://www.kiminona.com/index.html)』
+A calendar flip animation used in the movie called 『[君の名は｡](http://www.kiminona.com/index.html)』
 
 Swipe to change date with page curl animation.
 Written in Swift 3.
