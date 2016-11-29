@@ -220,25 +220,37 @@ open class TKDatePageView: UIView {
         contentView.layer.mask = maskLayer
     }
     
-    open func rotateToProgress( progress : CGFloat) {
+    private var bouncingProgress : CGFloat = 0.8
+    open func rotateToProgress( progress : CGFloat , movement : Movement) {
         if progress == 0 {
             rotateView.layer.transform = CATransform3DIdentity
             rotateView.center = CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2)
-        } else {
+        }
+        else if progress > bouncingProgress && movement == .forward && isBouncingAnimationPlayed == false {
+            startBounceAnimation()
+        } else if isBounceAnimationPlaying == false {
             let v = 1.0 - progress
-            rotateView.layer.transform = CATransform3DScale(CATransform3DMakeRotation(CGFloat.pi * v, 0, 1, 0), 1 + 0.6 * v, 1 + 0.6 * v, 1 + 0.6 * v)
+            let scale = 1 + 0.6 * max(0, v - (1 - bouncingProgress))
+            rotateView.layer.transform = CATransform3DScale(CATransform3DMakeRotation(CGFloat.pi * max(0,v - (1 - bouncingProgress)), 0, 1, 0), scale, scale, 1)
             rotateView.center = CGPoint(x: bounds.size.width / 2 + bounds.width * 0.5 * max(0, v - 0.5), y: bounds.size.height / 2 - bounds.height * 0.5 * max(0, v - 0.5))
         }
     }
+    
+    open func finishRotateAnimation() {
+        isBouncingAnimationPlayed = false
+    }
 
-    private(set) var isBounceAnimationPlaying = false
+    private var isBouncingAnimationPlayed = false
+    private var isBounceAnimationPlaying = false
     open func startBounceAnimation() {
+        isBouncingAnimationPlayed = true
         isBounceAnimationPlaying = true
+        self.rotateView.layer.transform = CATransform3DMakeScale(0.7, 0.7, 1)
         let a = UIViewPropertyAnimator(duration: 0.7, dampingRatio: 0.25) {
-            self.rotateView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.rotateView.layer.transform = CATransform3DIdentity
         }
-        a.addCompletion{ p in
-            self.isBounceAnimationPlaying = false 
+        a.addCompletion { position in
+            self.isBounceAnimationPlaying = false
         }
         a.startAnimation()
     }

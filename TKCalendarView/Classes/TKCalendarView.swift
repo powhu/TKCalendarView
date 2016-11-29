@@ -17,11 +17,7 @@ open class TKCalendarView: UIView ,TKDatePageViewDelegate, UIGestureRecognizerDe
 
     open var delegate : TKCalendarViewDelegate?
     private let pageCount = 4
-    enum Movement {
-        case forward
-        case backward
-        case none
-    }
+    
     private var movement = Movement.none
     open var calendar : Calendar = {
         var c = Calendar(identifier: .gregorian)
@@ -129,7 +125,7 @@ open class TKCalendarView: UIView ,TKDatePageViewDelegate, UIGestureRecognizerDe
             }
             view.animator.fractionComplete = value
             ges.setTranslation(.zero, in: self)
-        case .ended:
+        case .ended , .cancelled , .failed:
             if movement == .backward {
                 if animator.fractionComplete > 0.88 {
                     animator.isReversed = false
@@ -154,13 +150,7 @@ open class TKCalendarView: UIView ,TKDatePageViewDelegate, UIGestureRecognizerDe
         }
         
         guard let nextPageView = pages.after(item: pageView)  else { return }
-        if progress >= 0.8 && movement == .forward{
-            if nextPageView.isBounceAnimationPlaying == false {
-                nextPageView.startBounceAnimation()
-            }
-        } else {
-            nextPageView.rotateToProgress(progress: progress)
-        }
+        nextPageView.rotateToProgress(progress: progress ,movement: movement)
     }
 
     public func datePageView(pageView: TKDatePageView, finishedAnimationAtPosition position: UIViewAnimatingPosition) {
@@ -173,6 +163,10 @@ open class TKCalendarView: UIView ,TKDatePageViewDelegate, UIGestureRecognizerDe
         if movement == .backward && position == .start {
             selectedDate = pageView.date
             delegate?.calendar?(calendar: self, dateChanged: selectedDate)
+        }
+        
+        if  let nextPageView = pages.after(item: pageView) {
+            nextPageView.finishRotateAnimation()
         }
 
         if position == .end {
@@ -192,6 +186,12 @@ open class TKCalendarView: UIView ,TKDatePageViewDelegate, UIGestureRecognizerDe
     override open func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return Date().timeIntervalSince(lastGestureReconizedAt) > gestureMinimalRecognizeInterval
     }
+}
+
+public enum Movement {
+    case forward
+    case backward
+    case none
 }
 
 public extension Array where Element: Hashable {
