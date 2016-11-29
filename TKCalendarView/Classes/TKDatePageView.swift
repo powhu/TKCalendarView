@@ -262,24 +262,18 @@ open class TKDatePageView: UIView {
 
 public extension CGPoint {
     enum Direction {
-        case topLeft
-        case topRight
-        case bottomRight
-        case bottomLeft
+        case left
+        case right
         case none
     }
     
     var direction : Direction {
         if x == 0 && y == 0 {
             return .none
-        } else if x <= 0 && y <= 0 {
-            return .topLeft
-        } else if x >= 0 && y <= 0 {
-            return .topRight
-        } else if x >= 0 && y >= 0 {
-            return .bottomRight
+        } else if x > 0 {
+            return .right
         } else {
-            return .bottomLeft
+            return .left
         }
     }
 }

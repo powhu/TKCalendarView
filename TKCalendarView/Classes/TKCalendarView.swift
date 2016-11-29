@@ -81,14 +81,14 @@ open class TKCalendarView: UIView ,TKDatePageViewDelegate, UIGestureRecognizerDe
     open func pan(ges : UIPanGestureRecognizer) {
         if ges.state == .began {
             if movement != .none &&
-               movement != (ges.velocity(in: self).direction == .topRight ? .backward : .forward) {
+               movement != (ges.velocity(in: self).direction == .right ? .backward : .forward) {
                 ges.isEnabled = false
                 ges.isEnabled = true
                 return
             }
             
             lastGestureReconizedAt = Date()
-            movement = ges.velocity(in: self).direction == .topRight ? .backward : .forward
+            movement = ges.velocity(in: self).direction == .right ? .backward : .forward
 
             if movement == .backward {
                 let view = pages.last!
