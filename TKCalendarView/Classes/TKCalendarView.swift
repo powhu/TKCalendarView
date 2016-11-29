@@ -125,7 +125,7 @@ open class TKCalendarView: UIView ,TKDatePageViewDelegate, UIGestureRecognizerDe
             }
             view.animator.fractionComplete = value
             ges.setTranslation(.zero, in: self)
-        case .ended , .cancelled , .failed:
+        case .ended:
             if movement == .backward {
                 if animator.fractionComplete > 0.88 {
                     animator.isReversed = false
